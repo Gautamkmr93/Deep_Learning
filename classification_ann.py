@@ -6,10 +6,12 @@ import matplotlib.pyplot as plt
 
 #data importing
 data=pd.read_csv('data.csv')
-print(data.head(5))
+#print(data.head(5))
 
 #deleting extra columns
 del data['Unnamed: 32']
+
+print(data.head())
 
 #data Preprocessing
 import seaborn as sns
@@ -46,20 +48,23 @@ from keras.layers import Dense
 #adding the input and first hidden layer
 classifier = Sequential()
 #adding the 1st hidden layer
-classifier.add(Dense(units = 16, kernel_initializer = 'uniform', activation = 'relu', input_dim = 30))
+classifier.add(Dense(units = 16, kernel_initializer = 'uniform', activation = 'sigmoid', input_dim = 30))
 #adding the 2nd hidden layer
-classifier.add(Dense(units = 16, kernel_initializer = 'uniform', activation = 'relu'))
+classifier.add(Dense(units = 16, kernel_initializer = 'uniform', activation = 'sigmoid'))
 #adding the 3rd hidden layer
-classifier.add(Dense(units = 8, kernel_initializer = 'uniform', activation = 'relu'))
+classifier.add(Dense(units = 8, kernel_initializer = 'uniform', activation = 'sigmoid'))
 #adding the 4th hidden layer
 classifier.add(Dense(1,activation='sigmoid'))
+
 classifier.compile(optimizer="Adam", loss='binary_crossentropy', metrics=['accuracy'])
 #train your model
-classifier.fit(X_train, y_train, batch_size=100, epochs=100)
+classifier.fit(X_train, y_train, batch_size=100, epochs=7)
 
 # Predicting the Test set results
 y_pred = classifier.predict(X_test)
 y_pred = (y_pred > 0.5)
+
+print(y_pred)
 
 # Making the Confusion Matrix
 from sklearn.metrics import confusion_matrix
