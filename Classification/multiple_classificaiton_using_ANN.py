@@ -2,8 +2,6 @@ import keras
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.optimizers import Adam
-from keras.utils.vis_utils import model_to_dot
-from keras.utils import plot_model
 import seaborn as sns
 import pandas as pd
 import numpy as np
